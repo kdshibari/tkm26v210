@@ -14,8 +14,15 @@ import { useToast } from '@/hooks/use-toast';
 import { PREFERENCE_CATEGORIES } from '@/data/preferences';
 import { calculateMatchScore, hasAnyPreferencesSet } from '@/utils/matchScore';
 import { DisclaimerSection } from '@/components/DisclaimerSection';
+import { IdentityState } from '../IdentityData';
 
-const Index = () => {
+interface IndexProps {
+  setIsIdentityModalOpen: (isOpen: boolean) => void;
+  meIdentity: IdentityState;
+  partnerIdentity: IdentityState;
+}
+
+const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexProps) => {
   const {
     myPreferences,
     partnerPreferences,
@@ -46,6 +53,24 @@ const Index = () => {
 
   const handleCopyProfile = async () => {
     let text = `😈 ${myName ? `${myName}'s` : 'My'} Kinky Map\n\n`;
+
+    if (meIdentity.gender || meIdentity.pronouns || meIdentity.orientation || meIdentity.relationship) {
+      text += "=== Identity Profile ===\n";
+      text += `Pronouns: ${meIdentity.pronouns || "Not specified"}\n`;
+      text += `Gender: ${meIdentity.gender || "Not specified"}\n`;
+      text += `Orientation: ${meIdentity.orientation || "Not specified"}\n`;
+      text += `Dating: ${meIdentity.relationship || "Not specified"}\n\n`;
+    }
+    
+    if (partnerIdentity.gender || partnerIdentity.pronouns || partnerIdentity.orientation || partnerIdentity.relationship) {
+      text += "=== Partner Identity Profile ===\n";
+      text += `Pronouns: ${partnerIdentity.pronouns || "Not specified"}\n`;
+      text += `Gender: ${partnerIdentity.gender || "Not specified"}\n`;
+      text += `Orientation: ${partnerIdentity.orientation || "Not specified"}\n`;
+      text += `Dating: ${partnerIdentity.relationship || "Not specified"}\n\n`;
+    }
+
+    text += "=== Kink Preferences ===\n";
 
     PREFERENCE_CATEGORIES.forEach(category => {
       const allHard = category.items.every(item => myPreferences[item.key] === -2);
@@ -208,6 +233,13 @@ const Index = () => {
                 />
               </div>
             </div>
+            
+            <button
+              onClick={() => setIsIdentityModalOpen(true)}
+              className="w-full mt-4 p-3 bg-[#36454F] hover:bg-[#274D60] text-white rounded-lg font-bold transition-colors text-sm"
+            >
+              How Do We Identify?
+            </button>
           </motion.div>
 
           <div className="hidden lg:grid grid-cols-2 gap-8 mt-10">
@@ -413,7 +445,7 @@ const Index = () => {
                 Made in <span className="text-primary">Antarctica</span>
               </p>               
               <p className="text-[10px] uppercase tracking-widest font-semibold">
-                © 2026 The <span className="text-primary">Kinky</span> Map,v2.0.1
+                © 2026 The <span className="text-primary">Kinky</span> Map,v2.1.0
               </p>
             </div>
           </div>
