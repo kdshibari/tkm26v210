@@ -261,7 +261,7 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexPro
 
             <div className="space-y-4">
               <div className="bg-card/80 backdrop-blur-md p-4 rounded-2xl border border-blue-500/20 text-center shadow-lg">
-                <h3 className="font-display text-xl font-bold tracking-wide text-blue-400">{partnerName || 'Partner's Map'}</h3>
+                <h3 className="font-display text-xl font-bold tracking-wide text-blue-400">{partnerName || 'Partner Map'}</h3>
               </div>
               <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-blue-500/20 shadow-xl">
                 {visibleCategories.map((category) => (
