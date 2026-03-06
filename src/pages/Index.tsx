@@ -65,17 +65,17 @@ const Index = () => {
       titleText = `${myName}'s Kinky Map`;
     }
     
-    let text = `😈 ${titleText} 😈\n\n`;
+    let text = `🗺️ 😈 ${titleText} 😈 🗺️\n\n`;
 
     const formatIdentity = (name: string, id: IdentityState, defaultTitle: string) => {
       if (!id.gender && !id.pronouns && !id.orientation && !id.relationship) return "";
       
       const title = name ? `${name.toUpperCase()}'S IDENTITY` : defaultTitle;
       let section = `❖ ── ${title} ── ❖\n`;
-      if (id.pronouns) section += `Pronouns: ${id.pronouns}\n`;
-      if (id.gender) section += `Gender: ${id.gender}\n`;
-      if (id.orientation) section += `Orientation: ${id.orientation}\n`;
-      if (id.relationship) section += `Dating: ${id.relationship}\n`;
+      if (id.pronouns) section += `🗣️ Pronouns: ${id.pronouns}\n`;
+      if (id.gender) section += `👤 Gender: ${id.gender}\n`;
+      if (id.orientation) section += `🌈 Orientation: ${id.orientation}\n`;
+      if (id.relationship) section += `🔗 Dating: ${id.relationship}\n`;
       return section + `\n`;
     };
 
@@ -100,7 +100,7 @@ const Index = () => {
           if (val === 1) label = "🟡";
           if (val === 2) label = "🟢";
 
-          catText += `  ⤷ ${label} ${item.label}\n`;
+          catText += `  ↳ ${label} ${item.label}\n`;
           hasItems = true;
         }
       });
@@ -111,7 +111,7 @@ const Index = () => {
     });
 
     try {
-      const getFooter = (url: string) => text + `──────────────────────\n Compare maps with me here:\n${url}`;
+      const getFooter = (url: string) => text + `──────────────────────\n🔗 Compare maps with me here:\n${url}`;
 
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
@@ -259,7 +259,7 @@ const Index = () => {
           <div className="hidden lg:grid grid-cols-2 gap-8 mt-10">
             <div className="space-y-4">
               <div className="bg-card/80 backdrop-blur-md p-4 rounded-2xl border border-primary/20 text-center shadow-lg">
-                <h3 className="font-display text-xl font-bold tracking-wide text-primary/90">{myName || 'Me'}</h3>
+                <h3 className="font-display text-xl font-bold tracking-wide text-primary/90">{myName || 'My Map'}</h3>
               </div>
               <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-primary/20 shadow-xl">
                 {visibleCategories.map((category) => (
@@ -275,7 +275,7 @@ const Index = () => {
 
             <div className="space-y-4">
               <div className="bg-card/80 backdrop-blur-md p-4 rounded-2xl border border-blue-500/20 text-center shadow-lg">
-                <h3 className="font-display text-xl font-bold tracking-wide text-blue-400">{partnerName || 'Partner'}</h3>
+                <h3 className="font-display text-xl font-bold tracking-wide text-blue-400">{partnerName || 'Partner Map'}</h3>
               </div>
               <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-blue-500/20 shadow-xl">
                 {visibleCategories.map((category) => (
@@ -410,27 +410,55 @@ const Index = () => {
               When diving into BDSM, always keep these in mind:
             </p>
             
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">SSC</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Safe, Sane, and Consensual</span>
-              </div>
+            <Accordion type="single" collapsible className="space-y-3 w-full">
+              <AccordionItem value="ssc" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-primary text-sm min-w-[50px]">SSC</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Safe, Sane, and Consensual</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  SSC is a foundational framework. It dictates that all play must be physically and psychologically safe, engaged in by individuals of sound mind, and completely consensual.
+                </AccordionContent>
+              </AccordionItem>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">RACK</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Risk Aware Consensual Kink</span>
-              </div>
+              <AccordionItem value="rack" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-primary text-sm min-w-[50px]">RACK</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Risk Aware Consensual Kink</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  RACK acknowledges that all activities carry some inherent risk. It focuses on informed consent, where all parties understand the risks involved and actively choose to accept and mitigate them together.
+                </AccordionContent>
+              </AccordionItem>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">PRICK</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Personal Responsibility Informed Kink</span>
-              </div>
+              <AccordionItem value="prick" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-primary text-sm min-w-[50px]">PRICK</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Personal Responsibility Informed Kink</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  PRICK places the emphasis on each individual taking personal responsibility for their own boundaries, communicating their limits clearly, and owning the risks they agree to undertake.
+                </AccordionContent>
+              </AccordionItem>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">FRIES</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3 leading-tight">Freely given, Reversible, Informed, Enthusiastic, Specific</span>
-              </div>
-            </div>
+              <AccordionItem value="fries" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-primary text-sm min-w-[50px]">FRIES</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3 leading-tight">Freely given, Reversible, Informed, Enthusiastic, Specific</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  A comprehensive consent model meaning consent must be given without pressure, can be taken back at any time, requires knowing what you are agreeing to, should be an enthusiastic yes, and only applies to the specific acts discussed.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
             <p className="text-xs italic mt-6 pt-4 border-t border-white/5 text-center text-primary/80 font-medium tracking-wide">
               Be safe, have fun, and respect boundaries.
