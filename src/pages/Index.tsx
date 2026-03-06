@@ -72,10 +72,10 @@ const Index = () => {
       
       const title = name ? `${name.toUpperCase()}'S IDENTITY` : defaultTitle;
       let section = `❖ ── ${title} ── ❖\n`;
-      if (id.pronouns) section += `🗣️ Pronouns: ${id.pronouns}\n`;
-      if (id.gender) section += `👤 Gender: ${id.gender}\n`;
-      if (id.orientation) section += `🌈 Orientation: ${id.orientation}\n`;
-      if (id.relationship) section += `🔗 Dating: ${id.relationship}\n`;
+      if (id.pronouns) section += `Pronouns: ${id.pronouns}\n`;
+      if (id.gender) section += `Gender: ${id.gender}\n`;
+      if (id.orientation) section += `Orientation: ${id.orientation}\n`;
+      if (id.relationship) section += `Dating: ${id.relationship}\n`;
       return section + `\n`;
     };
 
@@ -100,7 +100,7 @@ const Index = () => {
           if (val === 1) label = "🟡";
           if (val === 2) label = "🟢";
 
-          catText += `  ↳ ${label} ${item.label}\n`;
+          catText += `  ⤷ ${label} ${item.label}\n`;
           hasItems = true;
         }
       });
@@ -111,7 +111,7 @@ const Index = () => {
     });
 
     try {
-      const getFooter = (url: string) => text + `──────────────────────\n🔗 Compare maps with me here:\n${url}`;
+      const getFooter = (url: string) => text + `──────────────────────\n Compare maps with me here:\n${url}`;
 
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
@@ -421,19 +421,16 @@ const Index = () => {
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                 <ol>
                 <li>
-                ::marker
                 <span className="text-primary text-sm min-w-[50px]">Safe</span>:
                 Ensuring safety involves taking all necessary precautions to minimize physical and emotional harm during BDSM activities. Practitioners are encouraged to research techniques, use appropriate equipment, and be aware of potential risks, including physical injury or psychological distress. Safety measures may also include having a basic understanding of first aid, especially if engaging in more intense forms of play.
                 </li>
                 
                 <li>
-                ::marker
                 <span className="text-primary text-sm min-w-[50px]">Sane</span>:
                 Sane refers to the mental state and rationality of participants. It emphasizes the importance of engaging in BDSM activities while being of sound mind and aware of risks and consequences. “Sane” implies that participants should avoid actions that could be excessively dangerous, impulsive, or beyond their ability to manage. This principle also considers mental health, as certain intense activities might not be advisable for individuals with specific psychological conditions.
                 </li>
                 
                 <li>
-                ::marker
                 <span className="text-primary text-sm min-w-[50px]">Consensual</span>:
                 Consent is the cornerstone of SSC. All participants must fully agree to engage in BDSM activities, and this agreement must be informed, mutual, and voluntary. Consent in SSC involves clear communication, negotiation of boundaries, and often the use of safe words, which allow participants to pause or stop activities at any time. Consent can be revoked at any point, and respecting this right is essential for ethical BDSM practice.
                 </li>
