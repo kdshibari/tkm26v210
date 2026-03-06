@@ -55,7 +55,7 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexPro
     let text = `😈 ${myName ? `${myName}'s` : 'My'} Kinky Map\n\n`;
 
     if (meIdentity.gender || meIdentity.pronouns || meIdentity.orientation || meIdentity.relationship) {
-      text += "=== Identity Profile ===\n";
+      text += "❖ ──  Identity Profile ── ❖\n";
       text += `Pronouns: ${meIdentity.pronouns || "Not specified"}\n`;
       text += `Gender: ${meIdentity.gender || "Not specified"}\n`;
       text += `Orientation: ${meIdentity.orientation || "Not specified"}\n`;
@@ -63,14 +63,14 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexPro
     }
     
     if (partnerIdentity.gender || partnerIdentity.pronouns || partnerIdentity.orientation || partnerIdentity.relationship) {
-      text += "=== Partner Identity Profile ===\n";
+      text += "❖ ──  Partner Identity Profile ── ❖\n";
       text += `Pronouns: ${partnerIdentity.pronouns || "Not specified"}\n`;
       text += `Gender: ${partnerIdentity.gender || "Not specified"}\n`;
       text += `Orientation: ${partnerIdentity.orientation || "Not specified"}\n`;
       text += `Dating: ${partnerIdentity.relationship || "Not specified"}\n\n`;
     }
 
-    text += "=== Kink Preferences ===\n";
+    text += "❖ ── Kink Preferences ── ❖\n";
 
     PREFERENCE_CATEGORIES.forEach(category => {
       const allHard = category.items.every(item => myPreferences[item.key] === -2);
