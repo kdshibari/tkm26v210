@@ -14,15 +14,17 @@ import { useToast } from '@/hooks/use-toast';
 import { PREFERENCE_CATEGORIES } from '@/data/preferences';
 import { calculateMatchScore, hasAnyPreferencesSet } from '@/utils/matchScore';
 import { DisclaimerSection } from '@/components/DisclaimerSection';
-import { IdentityState } from '../IdentityData';
+import { IdentityState, defaultIdentity } from '../IdentityData';
 
 interface IndexProps {
   setIsIdentityModalOpen: (isOpen: boolean) => void;
   meIdentity: IdentityState;
+  setMeIdentity: (data: IdentityState) => void;
   partnerIdentity: IdentityState;
+  setPartnerIdentity: (data: IdentityState) => void;
 }
 
-const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexProps) => {
+const Index = ({ setIsIdentityModalOpen, meIdentity, setMeIdentity, partnerIdentity, setPartnerIdentity }: IndexProps) => {
   const {
     myPreferences,
     partnerPreferences,
@@ -55,7 +57,7 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexPro
     let text = `😈 ${myName ? `${myName}'s` : 'My'} Kinky Map\n\n`;
 
     if (meIdentity.gender || meIdentity.pronouns || meIdentity.orientation || meIdentity.relationship) {
-      text += "❖ ──  Identity Profile ── ❖\n";
+      text += "=== Identity Profile ===\n";
       text += `Pronouns: ${meIdentity.pronouns || "Not specified"}\n`;
       text += `Gender: ${meIdentity.gender || "Not specified"}\n`;
       text += `Orientation: ${meIdentity.orientation || "Not specified"}\n`;
@@ -63,14 +65,14 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexPro
     }
     
     if (partnerIdentity.gender || partnerIdentity.pronouns || partnerIdentity.orientation || partnerIdentity.relationship) {
-      text += "❖ ──  Partner Identity Profile ── ❖\n";
+      text += "=== Partner Identity Profile ===\n";
       text += `Pronouns: ${partnerIdentity.pronouns || "Not specified"}\n`;
       text += `Gender: ${partnerIdentity.gender || "Not specified"}\n`;
       text += `Orientation: ${partnerIdentity.orientation || "Not specified"}\n`;
       text += `Dating: ${partnerIdentity.relationship || "Not specified"}\n\n`;
     }
 
-    text += "❖ ── Kink Preferences ── ❖\n";
+    text += "=== Kink Preferences ===\n";
 
     PREFERENCE_CATEGORIES.forEach(category => {
       const allHard = category.items.every(item => myPreferences[item.key] === -2);
@@ -163,6 +165,8 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, partnerIdentity }: IndexPro
   const handleReset = () => {
     if (window.confirm("Are you sure you want to reset all data? This action cannot be undone.")) {
       resetAll();
+      setMeIdentity(defaultIdentity);
+      setPartnerIdentity(defaultIdentity);
     }
   };
 
