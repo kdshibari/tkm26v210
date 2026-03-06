@@ -15,16 +15,9 @@ import { PREFERENCE_CATEGORIES } from '@/data/preferences';
 import { calculateMatchScore, hasAnyPreferencesSet } from '@/utils/matchScore';
 import { DisclaimerSection } from '@/components/DisclaimerSection';
 import { IdentityState, defaultIdentity } from '../IdentityData';
+import { IdentityModal } from '../IdentityModal';
 
-interface IndexProps {
-  setIsIdentityModalOpen: (isOpen: boolean) => void;
-  meIdentity: IdentityState;
-  setMeIdentity: (data: IdentityState) => void;
-  partnerIdentity: IdentityState;
-  setPartnerIdentity: (data: IdentityState) => void;
-}
-
-const Index = ({ setIsIdentityModalOpen, meIdentity, setMeIdentity, partnerIdentity, setPartnerIdentity }: IndexProps) => {
+const Index = () => {
   const {
     myPreferences,
     partnerPreferences,
@@ -46,6 +39,10 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, setMeIdentity, partnerIdent
   const [activeTab, setActiveTab] = useState('me');
   const { toast } = useToast();
 
+  const [isIdentityModalOpen, setIsIdentityModalOpen] = useState(false);
+  const [meIdentity, setMeIdentity] = useState<IdentityState>(defaultIdentity);
+  const [partnerIdentity, setPartnerIdentity] = useState<IdentityState>(defaultIdentity);
+
   const matchResult = useMemo(() => {
     return calculateMatchScore(myPreferences, partnerPreferences);
   }, [myPreferences, partnerPreferences]);
@@ -54,7 +51,14 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, setMeIdentity, partnerIdent
   const visibleCategories = PREFERENCE_CATEGORIES;
 
   const handleCopyProfile = async () => {
-    let text = `😈 ${myName ? `${myName}'s` : 'My'} Kinky Map\n\n`;
+    let titleText = 'My Kinky Map';
+    if (myName && partnerName) {
+      titleText = `${myName} & ${partnerName}'s Kinky Map`;
+    } else if (myName) {
+      titleText = `${myName}'s Kinky Map`;
+    }
+    
+    let text = `😈 ${titleText}\n\n`;
 
     if (meIdentity.gender || meIdentity.pronouns || meIdentity.orientation || meIdentity.relationship) {
       const myTitle = myName ? `${myName.toUpperCase()}'S IDENTITY` : 'MY IDENTITY';
@@ -456,6 +460,18 @@ const Index = ({ setIsIdentityModalOpen, meIdentity, setMeIdentity, partnerIdent
             </div>
           </div>
         </footer>
+        
+        <IdentityModal
+          isOpen={isIdentityModalOpen}
+          onClose={() => setIsIdentityModalOpen(false)}
+          meIdentity={meIdentity}
+          setMeIdentity={setMeIdentity}
+          partnerIdentity={partnerIdentity}
+          setPartnerIdentity={setPartnerIdentity}
+          myName={myName}
+          partnerName={partnerName}
+        />
+        
       </div>
     </div>
   );
