@@ -58,7 +58,7 @@ const Index = () => {
       titleText = `${myName}'s Kinky Map`;
     }
     
-    let text = `🗺️ 😈 ${titleText} 😈 🗺️\n\n`;
+    let text = `😈 ${titleText} 😈\n\n`;
 
     const formatIdentity = (name: string, id: IdentityState, defaultTitle: string) => {
       if (!id.gender && !id.pronouns && !id.orientation && !id.relationship) return "";
