@@ -7,9 +7,11 @@ interface Props {
   setMeIdentity: (data: IdentityState) => void;
   partnerIdentity: IdentityState;
   setPartnerIdentity: (data: IdentityState) => void;
+  myName: string;
+  partnerName: string;
 }
 
-export const IdentityModal = ({ isOpen, onClose, meIdentity, setMeIdentity, partnerIdentity, setPartnerIdentity }: Props) => {
+export const IdentityModal = ({ isOpen, onClose, meIdentity, setMeIdentity, partnerIdentity, setPartnerIdentity, myName, partnerName }: Props) => {
   if (!isOpen) return null;
 
   const renderSelect = (label: string, value: string, list: string[], onChange: (val: string) => void) => (
@@ -42,7 +44,9 @@ export const IdentityModal = ({ isOpen, onClose, meIdentity, setMeIdentity, part
         
         <div className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           <div className="bg-[#274D60]/30 p-4 rounded-lg border border-[#0A7075]">
-            <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 border-b border-[#0A7075] pb-2">Me</h3>
+            <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 border-b border-[#0A7075] pb-2">
+              {myName || 'Me'}
+            </h3>
             {renderSelect("Pronouns", meIdentity.pronouns, pronounsList, (val) => setMeIdentity({ ...meIdentity, pronouns: val }))}
             {renderSelect("Gender", meIdentity.gender, genderList, (val) => setMeIdentity({ ...meIdentity, gender: val }))}
             {renderSelect("Sexual Orientation", meIdentity.orientation, orientationList, (val) => setMeIdentity({ ...meIdentity, orientation: val }))}
@@ -50,7 +54,9 @@ export const IdentityModal = ({ isOpen, onClose, meIdentity, setMeIdentity, part
           </div>
 
           <div className="bg-[#274D60]/30 p-4 rounded-lg border border-[#0A7075]">
-            <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 border-b border-[#0A7075] pb-2">Partner</h3>
+            <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 border-b border-[#0A7075] pb-2">
+              {partnerName || 'Partner'}
+            </h3>
             {renderSelect("Pronouns", partnerIdentity.pronouns, pronounsList, (val) => setPartnerIdentity({ ...partnerIdentity, pronouns: val }))}
             {renderSelect("Gender", partnerIdentity.gender, genderList, (val) => setPartnerIdentity({ ...partnerIdentity, gender: val }))}
             {renderSelect("Sexual Orientation", partnerIdentity.orientation, orientationList, (val) => setPartnerIdentity({ ...partnerIdentity, orientation: val }))}
