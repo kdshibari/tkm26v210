@@ -62,7 +62,7 @@ const Index = () => {
 
     if (meIdentity.gender || meIdentity.pronouns || meIdentity.orientation || meIdentity.relationship) {
       const myTitle = myName ? `${myName.toUpperCase()}'S IDENTITY` : 'MY IDENTITY';
-      text += `❖ ── ${myTitle} ── ❖\n`;
+      text += `❖── ${myTitle} ──❖\n`;
       text += `Pronouns: ${meIdentity.pronouns || "Not specified"}\n`;
       text += `Gender: ${meIdentity.gender || "Not specified"}\n`;
       text += `Orientation: ${meIdentity.orientation || "Not specified"}\n`;
@@ -71,20 +71,20 @@ const Index = () => {
     
     if (partnerIdentity.gender || partnerIdentity.pronouns || partnerIdentity.orientation || partnerIdentity.relationship) {
       const partnerTitle = partnerName ? `${partnerName.toUpperCase()}'S IDENTITY` : 'PARTNER IDENTITY';
-      text += `❖ ── ${partnerTitle} ── ❖\n`;
+      text += `❖── ${partnerTitle} ──❖\n`;
       text += `Pronouns: ${partnerIdentity.pronouns || "Not specified"}\n`;
       text += `Gender: ${partnerIdentity.gender || "Not specified"}\n`;
       text += `Orientation: ${partnerIdentity.orientation || "Not specified"}\n`;
       text += `Dating: ${partnerIdentity.relationship || "Not specified"}\n\n`;
     }
 
-    text += "✳ ── KINK PREFERENCES ── ✳\n\n";
+    text += "❖── KINK PREFERENCES ──❖\n\n";
 
     PREFERENCE_CATEGORIES.forEach(category => {
       const allHard = category.items.every(item => myPreferences[item.key] === -2);
       if (allHard) return; 
 
-      let catText = `*️ ── ${category.name.toUpperCase()} ── *️\n`;
+      let catText = `❖── ${category.name.toUpperCase()} ──❖\n`;
       let hasItems = false;
 
       category.items.forEach(item => {
