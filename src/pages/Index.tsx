@@ -16,6 +16,12 @@ import { calculateMatchScore, hasAnyPreferencesSet } from '@/utils/matchScore';
 import { DisclaimerSection } from '@/components/DisclaimerSection';
 import { IdentityState } from '../IdentityData';
 import { IdentityModal } from '../IdentityModal';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Index = () => {
   const {
