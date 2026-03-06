@@ -58,25 +58,22 @@ const Index = () => {
       titleText = `${myName}'s Kinky Map`;
     }
     
-    let text = `😈 ${titleText}\n\n`;
+    let text = `🗺️ 😈 ${titleText} 😈 🗺️\n\n`;
 
-    if (meIdentity.gender || meIdentity.pronouns || meIdentity.orientation || meIdentity.relationship) {
-      const myTitle = myName ? `${myName.toUpperCase()}'S IDENTITY` : 'MY IDENTITY';
-      text += `❖ ── ${myTitle} ── ❖\n`;
-      text += `Pronouns: ${meIdentity.pronouns || "Not specified"}\n`;
-      text += `Gender: ${meIdentity.gender || "Not specified"}\n`;
-      text += `Orientation: ${meIdentity.orientation || "Not specified"}\n`;
-      text += `Dating: ${meIdentity.relationship || "Not specified"}\n\n`;
-    }
-    
-    if (partnerIdentity.gender || partnerIdentity.pronouns || partnerIdentity.orientation || partnerIdentity.relationship) {
-      const partnerTitle = partnerName ? `${partnerName.toUpperCase()}'S IDENTITY` : 'PARTNER IDENTITY';
-      text += `❖── ${partnerTitle} ──❖\n`;
-      text += `Pronouns: ${partnerIdentity.pronouns || "Not specified"}\n`;
-      text += `Gender: ${partnerIdentity.gender || "Not specified"}\n`;
-      text += `Orientation: ${partnerIdentity.orientation || "Not specified"}\n`;
-      text += `Dating: ${partnerIdentity.relationship || "Not specified"}\n\n`;
-    }
+    const formatIdentity = (name: string, id: IdentityState, defaultTitle: string) => {
+      if (!id.gender && !id.pronouns && !id.orientation && !id.relationship) return "";
+      
+      const title = name ? `${name.toUpperCase()}'S IDENTITY` : defaultTitle;
+      let section = `❖ ── ${title} ── ❖\n`;
+      if (id.pronouns) section += `Pronouns: ${id.pronouns}\n`;
+      if (id.gender) section += `Gender: ${id.gender}\n`;
+      if (id.orientation) section += `Orientation: ${id.orientation}\n`;
+      if (id.relationship) section += `Dating: ${id.relationship}\n`;
+      return section + `\n`;
+    };
+
+    text += formatIdentity(myName, meIdentity, 'MY IDENTITY');
+    text += formatIdentity(partnerName, partnerIdentity, 'PARTNER IDENTITY');
 
     text += "❖ ── KINK PREFERENCES ── ❖\n\n";
 
@@ -84,7 +81,7 @@ const Index = () => {
       const allHard = category.items.every(item => myPreferences[item.key] === -2);
       if (allHard) return; 
 
-      let catText = `❖ ── ${category.name.toUpperCase()} ── ❖\n`;
+      let catText = `✦ ${category.name.toUpperCase()} ✦\n`;
       let hasItems = false;
 
       category.items.forEach(item => {
@@ -96,7 +93,7 @@ const Index = () => {
           if (val === 1) label = "🟡";
           if (val === 2) label = "🟢";
 
-          catText += `${label} ${item.label}\n`;
+          catText += `  ↳ ${label} ${item.label}\n`;
           hasItems = true;
         }
       });
@@ -107,9 +104,11 @@ const Index = () => {
     });
 
     try {
+      const getFooter = (url: string) => text + `──────────────────────\n Compare maps with me here:\n${url}`;
+
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
-          new Blob([text + `Compare maps with me here: ${url}`], { type: 'text/plain' })
+          new Blob([getFooter(url)], { type: 'text/plain' })
         );
         
         await navigator.clipboard.write([
@@ -126,7 +125,7 @@ const Index = () => {
       }
 
       const url = await getShareableUrl();
-      const finalText = text + `Compare maps with me here: ${url}`;
+      const finalText = getFooter(url);
 
       const copyToClipboardFallback = (copyText: string) => {
         const textArea = document.createElement("textarea");
@@ -167,7 +166,6 @@ const Index = () => {
       });
     }
   };
-
   const handleReset = () => {
     if (window.confirm("Are you sure you want to reset all data? This action cannot be undone.")) {
       resetAll();
