@@ -46,13 +46,11 @@ const decodeState = (encoded: string): StoredState | null => {
 const getInitialState = (): Partial<StoredState> => {
   const hash = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
   
-  // If we have an old LZString hash, use it immediately
   if (hash && !hash.startsWith('map=')) {
     const decoded = decodeState(hash);
     if (decoded) return decoded;
   }
 
-  // Otherwise, load straight from localStorage
   if (typeof window !== 'undefined') {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -75,7 +73,7 @@ export const usePreferences = () => {
   const [myRole, setMyRole] = useState(initialState.myRole || '');
   const [partnerRole, setPartnerRole] = useState(initialState.partnerRole || '');
   
-  // New Identity States loaded from storage
+  // Connect identity states to initial stored data
   const [meIdentity, setMeIdentity] = useState<IdentityState>(initialState.meIdentity || defaultIdentity);
   const [partnerIdentity, setPartnerIdentity] = useState<IdentityState>(initialState.partnerIdentity || defaultIdentity);
   
@@ -116,7 +114,6 @@ export const usePreferences = () => {
 
   // Auto-save to localStorage whenever ANY state changes
   useEffect(() => {
-    // Prevent saving if we are in the middle of loading a shared map or just starting up
     if (!isInitialized || isLoading) return;
 
     const state: StoredState = {
