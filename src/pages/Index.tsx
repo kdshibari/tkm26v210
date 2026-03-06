@@ -166,11 +166,9 @@ const Index = () => {
       });
     }
   };
-  const handleReset = () => {
+const handleReset = () => {
     if (window.confirm("Are you sure you want to reset all data? This action cannot be undone.")) {
       resetAll();
-      setMeIdentity(defaultIdentity);
-      setPartnerIdentity(defaultIdentity);
     }
   };
 
