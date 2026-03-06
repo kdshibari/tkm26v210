@@ -14,7 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { PREFERENCE_CATEGORIES } from '@/data/preferences';
 import { calculateMatchScore, hasAnyPreferencesSet } from '@/utils/matchScore';
 import { DisclaimerSection } from '@/components/DisclaimerSection';
-import { IdentityState, defaultIdentity } from '../IdentityData';
+import { IdentityState } from '../IdentityData';
 import { IdentityModal } from '../IdentityModal';
 
 const Index = () => {
@@ -33,15 +33,16 @@ const Index = () => {
     updatePartnerPreference,
     resetAll,
     getShareableUrl,
-    isLoading 
+    isLoading,
+    meIdentity,
+    setMeIdentity,
+    partnerIdentity,
+    setPartnerIdentity
   } = usePreferences();
 
   const [activeTab, setActiveTab] = useState('me');
-  const { toast } = useToast();
-
   const [isIdentityModalOpen, setIsIdentityModalOpen] = useState(false);
-  const [meIdentity, setMeIdentity] = useState<IdentityState>(defaultIdentity);
-  const [partnerIdentity, setPartnerIdentity] = useState<IdentityState>(defaultIdentity);
+  const { toast } = useToast();
 
   const matchResult = useMemo(() => {
     return calculateMatchScore(myPreferences, partnerPreferences);
@@ -58,17 +59,17 @@ const Index = () => {
       titleText = `${myName}'s Kinky Map`;
     }
     
-    let text = `😈 ${titleText} 😈\n\n`;
+    let text = `🗺️ 😈 ${titleText} 😈 🗺️\n\n`;
 
     const formatIdentity = (name: string, id: IdentityState, defaultTitle: string) => {
       if (!id.gender && !id.pronouns && !id.orientation && !id.relationship) return "";
       
       const title = name ? `${name.toUpperCase()}'S IDENTITY` : defaultTitle;
       let section = `❖ ── ${title} ── ❖\n`;
-      if (id.pronouns) section += `Pronouns: ${id.pronouns}\n`;
-      if (id.gender) section += `Gender: ${id.gender}\n`;
-      if (id.orientation) section += `Orientation: ${id.orientation}\n`;
-      if (id.relationship) section += `Dating: ${id.relationship}\n`;
+      if (id.pronouns) section += `🗣️ Pronouns: ${id.pronouns}\n`;
+      if (id.gender) section += `👤 Gender: ${id.gender}\n`;
+      if (id.orientation) section += `🌈 Orientation: ${id.orientation}\n`;
+      if (id.relationship) section += `🔗 Dating: ${id.relationship}\n`;
       return section + `\n`;
     };
 
@@ -104,7 +105,7 @@ const Index = () => {
     });
 
     try {
-      const getFooter = (url: string) => text + `──────────────────────\nCompare maps with me here:\n${url}`;
+      const getFooter = (url: string) => text + `──────────────────────\n🔗 Compare maps with me here:\n${url}`;
 
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
@@ -166,7 +167,8 @@ const Index = () => {
       });
     }
   };
-const handleReset = () => {
+
+  const handleReset = () => {
     if (window.confirm("Are you sure you want to reset all data? This action cannot be undone.")) {
       resetAll();
     }
