@@ -29,7 +29,9 @@ const App = () => {
                 <Index 
                   setIsIdentityModalOpen={setIsIdentityModalOpen}
                   meIdentity={meIdentity}
+                  setMeIdentity={setMeIdentity}
                   partnerIdentity={partnerIdentity}
+                  setPartnerIdentity={setPartnerIdentity}
                 />
               } 
             />
