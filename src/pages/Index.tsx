@@ -419,12 +419,13 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  <ol>
                                  <li><strong>Safe</strong>: Ensuring safety involves taking all necessary precautions to minimize physical and emotional harm during BDSM activities. Practitioners are encouraged to research techniques, use appropriate equipment, and be aware of potential risks, including physical injury or psychological distress. Safety measures may also include having a basic understanding of first aid, especially if engaging in more intense forms of play.</li>
                 
                          <li><strong>Sane</strong>: Sane refers to the mental state and rationality of participants. It emphasizes the importance of engaging in BDSM activities while being of sound mind and aware of risks and consequences. “Sane” implies that participants should avoid actions that could be excessively dangerous, impulsive, or beyond their ability to manage. This principle also considers mental health, as certain intense activities might not be advisable for individuals with specific psychological conditions.</li>
                 
                          <li><strong>Consensual</strong>: Consent is the cornerstone of SSC. All participants must fully agree to engage in BDSM activities, and this agreement must be informed, mutual, and voluntary. Consent in SSC involves clear communication, negotiation of boundaries, and often the use of safe words, which allow participants to pause or stop activities at any time. Consent can be revoked at any point, and respecting this right is essential for ethical BDSM practice.</li>
-                        
+                        </ol>
                 </AccordionContent>
               </AccordionItem>
 
