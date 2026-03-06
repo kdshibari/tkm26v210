@@ -253,7 +253,7 @@ const Index = () => {
           <div className="hidden lg:grid grid-cols-2 gap-8 mt-10">
             <div className="space-y-4">
               <div className="bg-card/80 backdrop-blur-md p-4 rounded-2xl border border-primary/20 text-center shadow-lg">
-                <h3 className="font-display text-xl font-bold tracking-wide text-primary/90">{myName || 'My Map'}</h3>
+                <h3 className="font-display text-xl font-bold tracking-wide text-primary/90">{myName || 'Me'}</h3>
               </div>
               <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-primary/20 shadow-xl">
                 {visibleCategories.map((category) => (
@@ -269,7 +269,7 @@ const Index = () => {
 
             <div className="space-y-4">
               <div className="bg-card/80 backdrop-blur-md p-4 rounded-2xl border border-blue-500/20 text-center shadow-lg">
-                <h3 className="font-display text-xl font-bold tracking-wide text-blue-400">{partnerName || 'Partner Map'}</h3>
+                <h3 className="font-display text-xl font-bold tracking-wide text-blue-400">{partnerName || 'Partner'}</h3>
               </div>
               <div className="bg-card/80 backdrop-blur-md rounded-2xl p-5 border border-blue-500/20 shadow-xl">
                 {visibleCategories.map((category) => (
