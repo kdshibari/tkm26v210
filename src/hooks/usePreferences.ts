@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import LZString from 'lz-string';
 import { supabase } from '@/lib/supabase';
 import { Preferences, PreferenceValue, PREFERENCE_CATEGORIES } from '@/data/preferences';
+import { IdentityState, defaultIdentity } from '../IdentityData';
 
 const STORAGE_KEY = 'kinky_map_preferences';
 
@@ -12,6 +13,8 @@ interface StoredState {
   partnerName: string;
   myRole: string;
   partnerRole: string;
+  meIdentity?: IdentityState;
+  partnerIdentity?: IdentityState;
 }
 
 const getDefaultPreferences = (): Preferences => {
@@ -72,6 +75,10 @@ export const usePreferences = () => {
   const [myRole, setMyRole] = useState(initialState.myRole || '');
   const [partnerRole, setPartnerRole] = useState(initialState.partnerRole || '');
   
+  // New Identity States loaded from storage
+  const [meIdentity, setMeIdentity] = useState<IdentityState>(initialState.meIdentity || defaultIdentity);
+  const [partnerIdentity, setPartnerIdentity] = useState<IdentityState>(initialState.partnerIdentity || defaultIdentity);
+  
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -96,6 +103,8 @@ export const usePreferences = () => {
           setPartnerName(decoded.partnerName || '');
           setMyRole(decoded.myRole || '');
           setPartnerRole(decoded.partnerRole || '');
+          setMeIdentity(decoded.meIdentity || defaultIdentity);
+          setPartnerIdentity(decoded.partnerIdentity || defaultIdentity);
         }
         setIsLoading(false);
       }
@@ -117,9 +126,11 @@ export const usePreferences = () => {
       partnerName,
       myRole,
       partnerRole,
+      meIdentity,
+      partnerIdentity,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }, [myPreferences, partnerPreferences, myName, partnerName, myRole, partnerRole, isInitialized, isLoading]);
+  }, [myPreferences, partnerPreferences, myName, partnerName, myRole, partnerRole, meIdentity, partnerIdentity, isInitialized, isLoading]);
 
   const updateMyPreference = useCallback((key: string, value: PreferenceValue) => {
     setMyPreferences(prev => ({ ...prev, [key]: value }));
@@ -136,6 +147,8 @@ export const usePreferences = () => {
     setPartnerName('');
     setMyRole('');
     setPartnerRole('');
+    setMeIdentity(defaultIdentity);
+    setPartnerIdentity(defaultIdentity);
     localStorage.removeItem(STORAGE_KEY);
     window.history.replaceState({}, '', window.location.pathname);
   }, []);
@@ -148,6 +161,8 @@ export const usePreferences = () => {
       partnerName,
       myRole,
       partnerRole,
+      meIdentity,
+      partnerIdentity,
     };
 
     const shortId = Math.random().toString(36).substring(2, 10);
@@ -180,5 +195,9 @@ export const usePreferences = () => {
     resetAll,
     getShareableUrl,
     isLoading,
+    meIdentity,
+    setMeIdentity,
+    partnerIdentity,
+    setPartnerIdentity,
   };
 };
