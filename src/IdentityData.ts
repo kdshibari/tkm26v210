@@ -1,14 +1,14 @@
 export const pronounsList = [
-  "He/Him", "She/Her", "They/Them", "Ze/Zir", "Any", "Ask Me", "Prefer not to say"
+  "He/Him", "She/Her", "They/Them", "Ze/Zir", "Any", "Ask Me"
 ];
 export const genderList = [
-  "Woman", "Man", "Nonbinary", "Genderfluid", "Agender", "Bigender", "Questioning", "Prefer not to say"
+  "Woman", "Man", "Nonbinary", "Genderfluid", "Agender", "Bigender", "Questioning", "Ask Me"
 ];
 export const orientationList = [
-  "Heterosexual", "Homosexual", "Bisexual", "Pansexual", "Asexual", "Demisexual", "Queer", "Prefer not to say"
+  "Heterosexual", "Homosexual", "Bisexual", "Pansexual", "Asexual", "Demisexual", "Queer", "Ask Me"
 ];
 export const relationshipList = [
-  "Monogamous", "Polyamorous", "Open", "Ethical Nonmonogamy", "Relationship Anarchy", "Prefer not to say"
+  "Monogamous", "Polyamorous", "Open", "Ethical Nonmonogamy", "Relationship Anarchy", "Ask Me"
 ];
 
 export interface IdentityState {
