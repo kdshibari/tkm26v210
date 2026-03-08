@@ -496,6 +496,7 @@ const Index = () => {
                   </ul>
                 </AccordionContent>
               </AccordionItem>
+            </Accordion>
 
             <p className="text-xs italic mt-6 pt-4 border-t border-white/5 text-center text-primary/80 font-medium tracking-wide">
               Be safe, have fun, and respect boundaries.
