@@ -148,3 +148,20 @@ const handleCopyProfile = async () => {
       });
     }
   };
+<IdentityModal
+          isOpen={isIdentityModalOpen}
+          onClose={() => setIsIdentityModalOpen(false)}
+          meIdentity={meIdentity}
+          setMeIdentity={setMeIdentity}
+          partnerIdentity={partnerIdentity}
+          setPartnerIdentity={setPartnerIdentity}
+          myName={myName}
+          partnerName={partnerName}
+        />
+        
+      </div>
+    </div>
+  );
+};
+
+export default Index;
