@@ -464,7 +464,24 @@ const Index = () => {
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   <p>
-                    <span className="text-primary text-sm min-w-[50px]">Personal responsibility, informed, consensual kink (PRICK)</span>: is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
+                    <AccordionItem value="prick" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-primary text-sm min-w-[50px]">PRICK</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Personal Responsibility Informed Kink</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  <div className="space-y-3">
+                    <p>
+                      <span className="text-primary text-sm min-w-[50px]">Personal responsibility, informed, consensual kink (PRICK)</span>: is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in.
+                    </p>
+                    <p>
+                      Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
+                    </p>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
                   </p>
                 </AccordionContent>
               </AccordionItem>
