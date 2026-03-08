@@ -477,8 +477,7 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  <div className="space-y-3">
-                    <p>The Freely Given, Reversible, Informed, Enthusiastic, Specific (FRIES) model of consent is a consent model used in broader sex education, especially around teaching consent in general. FRIES is an acronym for the following:</p>
+        
                     <ul className="space-y-3">
                       <li>
                         <span className="text-primary text-sm min-w-[50px]">Freely Given</span>: A "yes" should come without any pressure or the feeling that there will be repercussions to saying "no." Are you feeling pressured into your 'yes'? Are they a host and you feel like you won't be invited again if you say no? Are you feeling like you have to go along with your peer group? Then your consent is not "freely given".
