@@ -82,7 +82,7 @@ const Index = () => {
     text += formatIdentity(myName, meIdentity, 'MY IDENTITY');
     text += formatIdentity(partnerName, partnerIdentity, 'PARTNER IDENTITY');
 
-    text += "❖ ── KINK PREFERENCES ── ❖\n\n";
+    text += "❖ ── Kink PREFERENCES ── ❖\n\n";
 
     PREFERENCE_CATEGORIES.forEach(category => {
       const allHard = category.items.every(item => myPreferences[item.key] === -2);
@@ -411,10 +411,10 @@ const Index = () => {
             <Accordion type="single" collapsible className="space-y-3 w-full">
               <AccordionItem value="faq-1" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
-                  <span className="font-bold text-primary/90 text-sm text-left">What are the best online kink and BDSM quizzes for couples?</span>
+                  <span className="font-bold text-primary/90 text-sm text-left">What are the best online Kink and BDSM quizzes for couples?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  The Kinky Map is designed to be the ultimate <strong>kink compatibility quiz for partners</strong>. Unlike a standard <strong>bdsm test</strong> or standard <strong>kink quiz</strong>, it acts as a comprehensive, visually engaging map to explore your shared interests safely and privately.
+                  The Kinky Map is designed to be the ultimate <strong>Kink compatibility quiz for partners</strong>. Unlike a standard <strong>BDSM test</strong> or standard <strong>Kink quiz</strong>, it acts as a comprehensive, visually engaging map to explore your shared interests safely and privately.
                 </AccordionContent>
               </AccordionItem>
 
@@ -423,7 +423,7 @@ const Index = () => {
                   <span className="font-bold text-primary/90 text-sm text-left">Where can I take a kinky partner test online?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  You can take our interactive <strong>kinky partner test</strong> right here, completely free and securely. Just fill out your preferences, generate a private link, and share it with your partner to compare your <strong>bdsm</strong> and <strong>kink</strong> boundaries side-by-side.
+                  You can take our interactive <strong>kinky partner test</strong> right here, completely free and securely. Just fill out your preferences, generate a private link, and share it with your partner to compare your <strong>BDSM</strong> and <strong>Kink</strong> boundaries side-by-side.
                 </AccordionContent>
               </AccordionItem>
 
@@ -432,7 +432,7 @@ const Index = () => {
                   <span className="font-bold text-primary/90 text-sm text-left">Is there a free BDSM quiz to discover my interests?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  Yes! Our <strong>free BDSM quiz</strong> allows you to navigate through dozens of carefully curated categories. Whether you are experienced or just looking for a beginner <strong>kink test</strong> to figure out what you might enjoy, this tool helps you discover your interests securely.
+                  Yes! Our <strong>free BDSM quiz</strong> allows you to navigate through dozens of carefully curated categories. Whether you are experienced or just looking for a beginner <strong>Kink test</strong> to figure out what you might enjoy, this tool helps you discover your interests securely.
                 </AccordionContent>
               </AccordionItem>
 
@@ -495,7 +495,7 @@ const Index = () => {
                       <span className="text-primary text-sm min-w-[50px]">Consensual</span>: Consent is central to RACK, with an emphasis on informed and enthusiastic consent. RACK encourages detailed negotiations and discussions so that all participants understand and agree to the potential risks involved. Consent is ongoing, and participants can withdraw it at any time.
                     </li>
                     <li>
-                      <span className="text-primary text-sm min-w-[50px]">Kink</span>: In RACK, kink refers to any consensual activity that individuals find erotically fulfilling, even if it may not be appealing or acceptable to others. RACK supports the idea that consenting adults should have the freedom to engage in whatever kinks they choose, as long as they are fully aware of the risks and willing to accept responsibility for them.
+                      <span className="text-primary text-sm min-w-[50px]">Kink</span>: In RACK, Kink refers to any consensual activity that individuals find erotically fulfilling, even if it may not be appealing or acceptable to others. RACK supports the idea that consenting adults should have the freedom to engage in whatever kinks they choose, as long as they are fully aware of the risks and willing to accept responsibility for them.
                     </li>
                   </ul>
                 </AccordionContent>
@@ -510,7 +510,7 @@ const Index = () => {
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   <p>
-                    Personal responsibility, informed, consensual kink (PRICK) is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
+                    Personal responsibility, informed, consensual Kink (PRICK) is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
                   </p>
                 </AccordionContent>
               </AccordionItem>
