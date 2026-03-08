@@ -58,31 +58,31 @@ const Index = () => {
   const visibleCategories = PREFERENCE_CATEGORIES;
 
   const handleCopyProfile = async () => {
-    let titleText = 'My Kinky Map';
+    let titleText = 'The Kinky Map';
     if (myName && partnerName) {
       titleText = `${myName} & ${partnerName}'s Kinky Map`;
     } else if (myName) {
       titleText = `${myName}'s Kinky Map`;
     }
     
-    let text = `         🗺️ 😈 ${titleText} 😈 🗺️\n\n`;
+    let text = `😈 ${titleText} 😈\n\n`;
 
     const formatIdentity = (name: string, id: IdentityState, defaultTitle: string) => {
       if (!id.gender && !id.pronouns && !id.orientation && !id.relationship) return "";
       
       const title = name ? `${name.toUpperCase()}'S IDENTITY` : defaultTitle;
-      let section = `        ❖ ── ${title} ── ❖\n`;
-      if (id.pronouns) section += `🗣️ Pronouns: ${id.pronouns}\n`;
-      if (id.gender) section += `👤 Gender: ${id.gender}\n`;
-      if (id.orientation) section += `🌈 Orientation: ${id.orientation}\n`;
-      if (id.relationship) section += `🔗 Dating: ${id.relationship}\n`;
+      let section = `❖ ── ${title} ── ❖\n`;
+      if (id.pronouns) section += `Pronouns: ${id.pronouns}\n`;
+      if (id.gender) section += `Gender: ${id.gender}\n`;
+      if (id.orientation) section += `Orientation: ${id.orientation}\n`;
+      if (id.relationship) section += `Dating: ${id.relationship}\n`;
       return section + `\n`;
     };
 
     text += formatIdentity(myName, meIdentity, 'MY IDENTITY');
     text += formatIdentity(partnerName, partnerIdentity, 'PARTNER IDENTITY');
 
-    text += "        ❖ ── KINK PREFERENCES ── ❖\n";
+    text += "❖ ── KINK PREFERENCES ── ❖\n";
 
     const getScoreEmoji = (val: number | undefined) => {
       if (val === -2) return "🔴";
