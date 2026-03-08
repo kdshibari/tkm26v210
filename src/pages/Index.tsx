@@ -463,7 +463,7 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  <p
+                  <p>
                     <span className="text-primary text-sm min-w-[50px]">Personal responsibility, informed, consensual kink (PRICK)</span>: is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
                   </p>
                 </AccordionContent>
