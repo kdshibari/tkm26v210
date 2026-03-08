@@ -65,17 +65,17 @@ const Index = () => {
       titleText = `${myName}'s Kinky Map`;
     }
     
-    let text = `😈 ${titleText} 😈\n\n`;
+    let text = `🗺️ 😈 ${titleText} 😈 🗺️\n\n`;
 
     const formatIdentity = (name: string, id: IdentityState, defaultTitle: string) => {
       if (!id.gender && !id.pronouns && !id.orientation && !id.relationship) return "";
       
       const title = name ? `${name.toUpperCase()}'S IDENTITY` : defaultTitle;
       let section = `❖ ── ${title} ── ❖\n`;
-      if (id.pronouns) section += `Pronouns: ${id.pronouns}\n`;
-      if (id.gender) section += `Gender: ${id.gender}\n`;
-      if (id.orientation) section += `Orientation: ${id.orientation}\n`;
-      if (id.relationship) section += `Dating: ${id.relationship}\n`;
+      if (id.pronouns) section += `🗣️ Pronouns: ${id.pronouns}\n`;
+      if (id.gender) section += `👤 Gender: ${id.gender}\n`;
+      if (id.orientation) section += `🌈 Orientation: ${id.orientation}\n`;
+      if (id.relationship) section += `🔗 Dating: ${id.relationship}\n`;
       return section + `\n`;
     };
 
@@ -100,7 +100,7 @@ const Index = () => {
           if (val === 1) label = "🟡";
           if (val === 2) label = "🟢";
 
-          catText += `  ⤷ ${label} ${item.label}\n`;
+          catText += `  ↳ ${label} ${item.label}\n`;
           hasItems = true;
         }
       });
@@ -111,7 +111,7 @@ const Index = () => {
     });
 
     try {
-      const getFooter = (url: string) => text + `──────────────────────\n Compare maps with me here:\n${url}`;
+      const getFooter = (url: string) => text + `──────────────────────\n🔗 Compare maps with me here:\n${url}`;
 
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
@@ -419,22 +419,17 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                <ol>
-                <li>
-                <span className="text-primary text-sm min-w-[50px]">Safe</span>:
-                Ensuring safety involves taking all necessary precautions to minimize physical and emotional harm during BDSM activities. Practitioners are encouraged to research techniques, use appropriate equipment, and be aware of potential risks, including physical injury or psychological distress. Safety measures may also include having a basic understanding of first aid, especially if engaging in more intense forms of play.
-                </li>
-                
-                <li>
-                <span className="text-primary text-sm min-w-[50px]">Sane</span>:
-                Sane refers to the mental state and rationality of participants. It emphasizes the importance of engaging in BDSM activities while being of sound mind and aware of risks and consequences. “Sane” implies that participants should avoid actions that could be excessively dangerous, impulsive, or beyond their ability to manage. This principle also considers mental health, as certain intense activities might not be advisable for individuals with specific psychological conditions.
-                </li>
-                
-                <li>
-                <span className="text-primary text-sm min-w-[50px]">Consensual</span>:
-                Consent is the cornerstone of SSC. All participants must fully agree to engage in BDSM activities, and this agreement must be informed, mutual, and voluntary. Consent in SSC involves clear communication, negotiation of boundaries, and often the use of safe words, which allow participants to pause or stop activities at any time. Consent can be revoked at any point, and respecting this right is essential for ethical BDSM practice.
-                </li>
-                </ol>
+                  <ul className="space-y-3">
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Safe</span>: Ensuring safety involves taking all necessary precautions to minimize physical and emotional harm during BDSM activities. Practitioners are encouraged to research techniques, use appropriate equipment, and be aware of potential risks, including physical injury or psychological distress. Safety measures may also include having a basic understanding of first aid, especially if engaging in more intense forms of play.
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Sane</span>: Sane refers to the mental state and rationality of participants. It emphasizes the importance of engaging in BDSM activities while being of sound mind and aware of risks and consequences. “Sane” implies that participants should avoid actions that could be excessively dangerous, impulsive, or beyond their ability to manage. This principle also considers mental health, as certain intense activities might not be advisable for individuals with specific psychological conditions.
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Consensual</span>: Consent is the cornerstone of SSC. All participants must fully agree to engage in BDSM activities, and this agreement must be informed, mutual, and voluntary. Consent in SSC involves clear communication, negotiation of boundaries, and often the use of safe words, which allow participants to pause or stop activities at any time. Consent can be revoked at any point, and respecting this right is essential for ethical BDSM practice.
+                    </li>
+                  </ul>
                 </AccordionContent>
               </AccordionItem>
 
@@ -446,7 +441,17 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  RACK acknowledges that all activities carry some inherent risk. It focuses on informed consent, where all parties understand the risks involved and actively choose to accept and mitigate them together.
+                  <ul className="space-y-3">
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Risk-Aware</span>: RACK encourages participants to be fully aware of the risks associated with their chosen activities. This includes understanding the physical, psychological, and emotional impacts of BDSM practices and knowing how to mitigate those risks. Practitioners are urged to educate themselves on both the immediate and potential long-term effects of their activities, with the understanding that some forms of BDSM, like breath play or suspension, carry unavoidable dangers.
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Consensual</span>: Consent is central to RACK, with an emphasis on informed and enthusiastic consent. RACK encourages detailed negotiations and discussions so that all participants understand and agree to the potential risks involved. Consent is ongoing, and participants can withdraw it at any time.
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Kink</span>: In RACK, kink refers to any consensual activity that individuals find erotically fulfilling, even if it may not be appealing or acceptable to others. RACK supports the idea that consenting adults should have the freedom to engage in whatever kinks they choose, as long as they are fully aware of the risks and willing to accept responsibility for them.
+                    </li>
+                  </ul>
                 </AccordionContent>
               </AccordionItem>
 
@@ -458,7 +463,9 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  PRICK places the emphasis on each individual taking personal responsibility for their own boundaries, communicating their limits clearly, and owning the risks they agree to undertake.
+                  <p>
+                    Personal responsibility, informed, consensual kink (PRICK) is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
+                  </p>
                 </AccordionContent>
               </AccordionItem>
 
@@ -470,7 +477,26 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  A comprehensive consent model meaning consent must be given without pressure, can be taken back at any time, requires knowing what you are agreeing to, should be an enthusiastic yes, and only applies to the specific acts discussed.
+                  <div className="space-y-3">
+                    <p>The Freely Given, Reversible, Informed, Enthusiastic, Specific (FRIES) model of consent is a consent model used in broader sex education, especially around teaching consent in general. FRIES is an acronym for the following:</p>
+                    <ul className="space-y-3">
+                      <li>
+                        <span className="text-primary text-sm min-w-[50px]">Freely Given</span>: A "yes" should come without any pressure or the feeling that there will be repercussions to saying "no." Are you feeling pressured into your 'yes'? Are they a host and you feel like you won't be invited again if you say no? Are you feeling like you have to go along with your peer group? Then your consent is not "freely given".
+                      </li>
+                      <li>
+                        <span className="text-primary text-sm min-w-[50px]">Reversible</span>: Yes can turn to no at any point, for any reason. There isn't a stage where someone cannot say stop.
+                      </li>
+                      <li>
+                        <span className="text-primary text-sm min-w-[50px]">Informed</span>: The person must fully understand what they are agreeing to. That includes any possible risks, or long-term effects such as marks (and how long they'll last).
+                      </li>
+                      <li>
+                        <span className="text-primary text-sm min-w-[50px]">Enthusiastic</span>: True consent is an enthusiastic "yes, please!" not something like "ummm, yeah...I guess?" Anything less than ENTHUSIASTIC consent should be taken as a no!
+                      </li>
+                      <li>
+                        <span className="text-primary text-sm min-w-[50px]">Specific</span>: Make sure what you are saying yes to is all-encompassing of the thing you are about to do. Do not add in other elements that weren't discussed and agreed to.
+                      </li>
+                    </ul>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
