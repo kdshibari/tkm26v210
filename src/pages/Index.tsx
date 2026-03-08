@@ -420,10 +420,10 @@ const Index = () => {
 
               <AccordionItem value="faq-2" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
-                  <span className="font-bold text-primary/90 text-sm text-left">Where can I take a kinky partner test online?</span>
+                  <span className="font-bold text-primary/90 text-sm text-left">Where can I take a Kinky partner test online?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-                  You can take our interactive <strong>kinky partner test</strong> right here, completely free and securely. Just fill out your preferences, generate a private link, and share it with your partner to compare your <strong>BDSM</strong> and <strong>Kink</strong> boundaries side-by-side.
+                  You can take our interactive <strong>Kinky partner test</strong> right here, completely free and securely. Just fill out your preferences, generate a private link, and share it with your partner to compare your <strong>BDSM</strong> and <strong>Kink</strong> boundaries side-by-side.
                 </AccordionContent>
               </AccordionItem>
 
@@ -438,7 +438,7 @@ const Index = () => {
 
               <AccordionItem value="faq-4" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
-                  <span className="font-bold text-primary/90 text-sm text-left">How to talk about kinky preferences with a new partner?</span>
+                  <span className="font-bold text-primary/90 text-sm text-left">How to talk about Kinky preferences with a new partner?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   Communication is key in any relationship. Using a <strong>quiz</strong> or negotiation tool like The Kinky Map makes it much easier to break the ice. Instead of guessing, you both fill out the <strong>test</strong> separately, and the system automatically calculates your match score and highlights your overlapping desires.
