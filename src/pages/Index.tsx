@@ -477,28 +477,25 @@ const Index = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
-        
-                    <ul className="space-y-3">
-                      <li>
-                        <span className="text-primary text-sm min-w-[50px]">Freely Given</span>: A "yes" should come without any pressure or the feeling that there will be repercussions to saying "no." Are you feeling pressured into your 'yes'? Are they a host and you feel like you won't be invited again if you say no? Are you feeling like you have to go along with your peer group? Then your consent is not "freely given".
-                      </li>
-                      <li>
-                        <span className="text-primary text-sm min-w-[50px]">Reversible</span>: Yes can turn to no at any point, for any reason. There isn't a stage where someone cannot say stop.
-                      </li>
-                      <li>
-                        <span className="text-primary text-sm min-w-[50px]">Informed</span>: The person must fully understand what they are agreeing to. That includes any possible risks, or long-term effects such as marks (and how long they'll last).
-                      </li>
-                      <li>
-                        <span className="text-primary text-sm min-w-[50px]">Enthusiastic</span>: True consent is an enthusiastic "yes, please!" not something like "ummm, yeah...I guess?" Anything less than ENTHUSIASTIC consent should be taken as a no!
-                      </li>
-                      <li>
-                        <span className="text-primary text-sm min-w-[50px]">Specific</span>: Make sure what you are saying yes to is all-encompassing of the thing you are about to do. Do not add in other elements that weren't discussed and agreed to.
-                      </li>
-                    </ul>
-                  </div>
+                  <ul className="space-y-3">
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Freely Given</span>: A "yes" should come without any pressure or the feeling that there will be repercussions to saying "no." Are you feeling pressured into your 'yes'? Are they a host and you feel like you won't be invited again if you say no? Are you feeling like you have to go along with your peer group? Then your consent is not "freely given".
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Reversible</span>: Yes can turn to no at any point, for any reason. There isn't a stage where someone cannot say stop.
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Informed</span>: The person must fully understand what they are agreeing to. That includes any possible risks, or long-term effects such as marks (and how long they'll last).
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Enthusiastic</span>: True consent is an enthusiastic "yes, please!" not something like "ummm, yeah...I guess?" Anything less than ENTHUSIASTIC consent should be taken as a no!
+                    </li>
+                    <li>
+                      <span className="text-primary text-sm min-w-[50px]">Specific</span>: Make sure what you are saying yes to is all-encompassing of the thing you are about to do. Do not add in other elements that weren't discussed and agreed to.
+                    </li>
+                  </ul>
                 </AccordionContent>
               </AccordionItem>
-            </Accordion>
 
             <p className="text-xs italic mt-6 pt-4 border-t border-white/5 text-center text-primary/80 font-medium tracking-wide">
               Be safe, have fun, and respect boundaries.
