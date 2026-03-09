@@ -13,16 +13,16 @@ interface Props {
 }
 
 export const IdentityModal = ({ isOpen, onClose, meIdentity, setMeIdentity, partnerIdentity, setPartnerIdentity, myName, partnerName }: Props) => {
-  const renderSelect = (label: string, value: string, list: string[], onChange: (val: string) => void) => (
-    <div className="mb-3 sm:mb-4">
-      <label className="block text-xs mb-1 text-[#6BA3BE] font-semibold">{label}</label>
+  const renderSelect = (label: string, value: string, list: string[], onChange: (val: string) => void, focusClass: string) => (
+    <div className="mb-4">
+      <label className="block text-[10px] uppercase tracking-wider text-muted-foreground ml-1 mb-1.5">{label}</label>
       <select 
-        className="w-full p-2.5 sm:p-3 rounded bg-[#274D60] text-white border border-[#0A7075] focus:border-[#0C969C] outline-none text-sm transition-colors"
+        className={`w-full p-3 rounded-xl bg-background/50 text-foreground border border-white/10 outline-none text-sm transition-all focus:border-transparent focus:ring-1 ${focusClass} cursor-pointer appearance-none`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
-        <option value="">Select...</option>
-        {list.map(item => <option key={item} value={item}>{item}</option>)}
+        <option value="" className="bg-[#141417] text-muted-foreground">Select...</option>
+        {list.map(item => <option key={item} value={item} className="bg-[#141417] text-foreground">{item}</option>)}
       </select>
     </div>
   );
@@ -35,7 +35,7 @@ export const IdentityModal = ({ isOpen, onClose, meIdentity, setMeIdentity, part
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#36454F]/95 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
         >
           <motion.div 
             initial={{ opacity: 0, scale: 0.85, y: 20 }}
@@ -47,45 +47,47 @@ export const IdentityModal = ({ isOpen, onClose, meIdentity, setMeIdentity, part
               stiffness: 300,
               duration: 0.3 
             }}
-            className="bg-[#032F30] border border-[#0A7075] w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-xl shadow-2xl flex flex-col relative"
+            className="bg-card/95 border border-white/10 w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col relative"
           >
             
-            <div className="sticky top-0 z-10 bg-[#032F30] px-4 sm:px-6 py-4 border-b border-[#0A7075] flex justify-between items-center rounded-t-xl">
-              <h2 className="text-xl sm:text-2xl font-bold text-[#6BA3BE]">How Do We Identify?</h2>
+            <div className="sticky top-0 z-10 bg-card/95 backdrop-blur-md px-6 py-5 border-b border-white/10 flex justify-between items-center rounded-t-3xl">
+              <h2 className="text-xl sm:text-2xl font-display font-bold tracking-wide text-foreground">How Do We Identify?</h2>
               <button 
                 onClick={onClose} 
-                className="text-[#6BA3BE] hover:text-white text-3xl leading-none px-2 transition-colors duration-300"
+                className="text-muted-foreground hover:text-foreground text-3xl leading-none px-2 transition-colors duration-300"
               >
                 &times;
               </button>
             </div>
             
-            <div className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-              <div className="bg-[#274D60]/30 p-4 rounded-lg border border-[#0A7075]">
-                <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 border-b border-[#0A7075] pb-2">
-                  {myName || 'Me'}
+            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-background/40 p-5 rounded-2xl border border-primary/20 shadow-lg relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
+                <h3 className="font-display text-lg font-bold tracking-wide text-primary/90 mb-5 text-center">
+                  {myName || 'My Identity'}
                 </h3>
-                {renderSelect("Pronouns", meIdentity.pronouns, pronounsList, (val) => setMeIdentity({ ...meIdentity, pronouns: val }))}
-                {renderSelect("Gender", meIdentity.gender, genderList, (val) => setMeIdentity({ ...meIdentity, gender: val }))}
-                {renderSelect("Sexual Orientation", meIdentity.orientation, orientationList, (val) => setMeIdentity({ ...meIdentity, orientation: val }))}
-                {renderSelect("Dating Preferences", meIdentity.relationship, relationshipList, (val) => setMeIdentity({ ...meIdentity, relationship: val }))}
+                {renderSelect("Pronouns", meIdentity.pronouns, pronounsList, (val) => setMeIdentity({ ...meIdentity, pronouns: val }), "focus:ring-primary/50")}
+                {renderSelect("Gender", meIdentity.gender, genderList, (val) => setMeIdentity({ ...meIdentity, gender: val }), "focus:ring-primary/50")}
+                {renderSelect("Sexual Orientation", meIdentity.orientation, orientationList, (val) => setMeIdentity({ ...meIdentity, orientation: val }), "focus:ring-primary/50")}
+                {renderSelect("Dating Preferences", meIdentity.relationship, relationshipList, (val) => setMeIdentity({ ...meIdentity, relationship: val }), "focus:ring-primary/50")}
               </div>
 
-              <div className="bg-[#274D60]/30 p-4 rounded-lg border border-[#0A7075]">
-                <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 border-b border-[#0A7075] pb-2">
-                  {partnerName || 'Partner'}
+              <div className="bg-background/40 p-5 rounded-2xl border border-blue-500/20 shadow-lg relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500/50 to-transparent"></div>
+                <h3 className="font-display text-lg font-bold tracking-wide text-blue-400 mb-5 text-center">
+                  {partnerName || 'Partner Identity'}
                 </h3>
-                {renderSelect("Pronouns", partnerIdentity.pronouns, pronounsList, (val) => setPartnerIdentity({ ...partnerIdentity, pronouns: val }))}
-                {renderSelect("Gender", partnerIdentity.gender, genderList, (val) => setPartnerIdentity({ ...partnerIdentity, gender: val }))}
-                {renderSelect("Sexual Orientation", partnerIdentity.orientation, orientationList, (val) => setPartnerIdentity({ ...partnerIdentity, orientation: val }))}
-                {renderSelect("Dating Preferences", partnerIdentity.relationship, relationshipList, (val) => setPartnerIdentity({ ...partnerIdentity, relationship: val }))}
+                {renderSelect("Pronouns", partnerIdentity.pronouns, pronounsList, (val) => setPartnerIdentity({ ...partnerIdentity, pronouns: val }), "focus:ring-blue-500/50")}
+                {renderSelect("Gender", partnerIdentity.gender, genderList, (val) => setPartnerIdentity({ ...partnerIdentity, gender: val }), "focus:ring-blue-500/50")}
+                {renderSelect("Sexual Orientation", partnerIdentity.orientation, orientationList, (val) => setPartnerIdentity({ ...partnerIdentity, orientation: val }), "focus:ring-blue-500/50")}
+                {renderSelect("Dating Preferences", partnerIdentity.relationship, relationshipList, (val) => setPartnerIdentity({ ...partnerIdentity, relationship: val }), "focus:ring-blue-500/50")}
               </div>
             </div>
 
-            <div className="sticky bottom-0 z-10 bg-[#032F30] p-4 sm:p-6 border-t border-[#0A7075] rounded-b-xl">
+            <div className="sticky bottom-0 z-10 bg-card/95 backdrop-blur-md p-6 border-t border-white/10 rounded-b-3xl flex justify-center">
               <button 
                 onClick={onClose}
-                className="w-full p-3 sm:p-4 bg-[#0C969C] hover:bg-[#0A7075] text-white rounded-lg font-bold transition-colors duration-300 text-sm sm:text-base"
+                className="w-full sm:w-2/3 p-4 bg-[#1a1a20] hover:bg-white/10 text-foreground border border-white/20 rounded-xl font-bold tracking-wide transition-all duration-300 shadow-lg text-sm sm:text-base"
               >
                 Save Identity Profile
               </button>
