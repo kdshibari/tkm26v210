@@ -58,7 +58,7 @@ const Index = () => {
   const visibleCategories = PREFERENCE_CATEGORIES;
 
   const handleCopyProfile = async () => {
-    let titleText = 'The Kinky Map';
+    let titleText = 'My Kinky Map';
     if (myName && partnerName) {
       titleText = `${myName} & ${partnerName}'s Kinky Map`;
     } else if (myName) {
@@ -145,7 +145,7 @@ const Index = () => {
     }
 
     try {
-      const getFooter = (url: string) => text + `──────────────────────\n🔗 Compare maps with me here:\n${url}`;
+      const getFooter = (url: string) => text + `──────────────────────\n Compare maps with me here:\n${url}`;
 
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
@@ -445,7 +445,7 @@ const Index = () => {
             <Accordion type="single" collapsible className="space-y-3 w-full">
               <AccordionItem value="faq-1" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
-                  <span className="font-bold text-primary/90 text-sm text-left">What are the best online kink and BDSM quizzes for couples?</span>
+                  <span className="font-bold text-white/90 text-sm text-left">What are the best online kink and BDSM quizzes for couples?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   The Kinky Map is designed to be the ultimate <strong>kink compatibility quiz for partners</strong>. Unlike a standard <strong>bdsm test</strong> or standard <strong>kink quiz</strong>, it acts as a comprehensive, visually engaging map to explore your shared interests safely and privately.
@@ -454,7 +454,7 @@ const Index = () => {
 
               <AccordionItem value="faq-2" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
-                  <span className="font-bold text-primary/90 text-sm text-left">Where can I take a kinky partner test online?</span>
+                  <span className="font-bold text-white/90 text-sm text-left">Where can I take a kinky partner test online?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   You can take our interactive <strong>kinky partner test</strong> right here, completely free and securely. Just fill out your preferences, generate a private link, and share it with your partner to compare your <strong>bdsm</strong> and <strong>kink</strong> boundaries side-by-side.
@@ -463,7 +463,7 @@ const Index = () => {
 
               <AccordionItem value="faq-3" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
-                  <span className="font-bold text-primary/90 text-sm text-left">Is there a free BDSM quiz to discover my interests?</span>
+                  <span className="font-bold text-white/90 text-sm text-left">Is there a free BDSM quiz to discover my interests?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   Yes! Our <strong>free BDSM quiz</strong> allows you to navigate through dozens of carefully curated categories. Whether you are experienced or just looking for a beginner <strong>kink test</strong> to figure out what you might enjoy, this tool helps you discover your interests securely.
@@ -472,7 +472,7 @@ const Index = () => {
 
               <AccordionItem value="faq-4" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
-                  <span className="font-bold text-primary/90 text-sm text-left">How to talk about kinky preferences with a new partner?</span>
+                  <span className="font-bold text-white/90 text-sm text-left">How to talk about kinky preferences with a new partner?</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   Communication is key in any relationship. Using a <strong>quiz</strong> or negotiation tool like The Kinky Map makes it much easier to break the ice. Instead of guessing, you both fill out the <strong>test</strong> separately, and the system automatically calculates your match score and highlights your overlapping desires.
@@ -494,20 +494,20 @@ const Index = () => {
               <AccordionItem value="ssc" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
                   <div className="flex items-center gap-3 text-left">
-                    <span className="font-bold text-primary text-sm min-w-[50px]">SSC</span>
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">SSC</span>
                     <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Safe, Sane, and Consensual</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   <ul className="space-y-3">
                     <li>
-                      <span className="text-primary text-sm min-w-[50px]">Safe</span>: Ensuring safety involves taking all necessary precautions to minimize physical and emotional harm during BDSM activities. Practitioners are encouraged to research techniques, use appropriate equipment, and be aware of potential risks, including physical injury or psychological distress. Safety measures may also include having a basic understanding of first aid, especially if engaging in more intense forms of play.
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Safe</span>: Ensuring safety involves taking all necessary precautions to minimize physical and emotional harm during BDSM activities. Practitioners are encouraged to research techniques, use appropriate equipment, and be aware of potential risks, including physical injury or psychological distress. Safety measures may also include having a basic understanding of first aid, especially if engaging in more intense forms of play.
                     </li>
                     <li>
-                      <span className="text-primary text-sm min-w-[50px]">Sane</span>: Sane refers to the mental state and rationality of participants. It emphasizes the importance of engaging in BDSM activities while being of sound mind and aware of risks and consequences. “Sane” implies that participants should avoid actions that could be excessively dangerous, impulsive, or beyond their ability to manage. This principle also considers mental health, as certain intense activities might not be advisable for individuals with specific psychological conditions.
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Sane</span>: Sane refers to the mental state and rationality of participants. It emphasizes the importance of engaging in BDSM activities while being of sound mind and aware of risks and consequences. “Sane” implies that participants should avoid actions that could be excessively dangerous, impulsive, or beyond their ability to manage. This principle also considers mental health, as certain intense activities might not be advisable for individuals with specific psychological conditions.
                     </li>
                     <li>
-                      <span className="text-primary text-sm min-w-[50px]">Consensual</span>: Consent is the cornerstone of SSC. All participants must fully agree to engage in BDSM activities, and this agreement must be informed, mutual, and voluntary. Consent in SSC involves clear communication, negotiation of boundaries, and often the use of safe words, which allow participants to pause or stop activities at any time. Consent can be revoked at any point, and respecting this right is essential for ethical BDSM practice.
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Consensual</span>: Consent is the cornerstone of SSC. All participants must fully agree to engage in BDSM activities, and this agreement must be informed, mutual, and voluntary. Consent in SSC involves clear communication, negotiation of boundaries, and often the use of safe words, which allow participants to pause or stop activities at any time. Consent can be revoked at any point, and respecting this right is essential for ethical BDSM practice.
                     </li>
                   </ul>
                 </AccordionContent>
@@ -516,20 +516,20 @@ const Index = () => {
               <AccordionItem value="rack" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
                   <div className="flex items-center gap-3 text-left">
-                    <span className="font-bold text-primary text-sm min-w-[50px]">RACK</span>
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">RACK</span>
                     <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Risk Aware Consensual Kink</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   <ul className="space-y-3">
                     <li>
-                      <span className="text-primary text-sm min-w-[50px]">Risk-Aware</span>: RACK encourages participants to be fully aware of the risks associated with their chosen activities. This includes understanding the physical, psychological, and emotional impacts of BDSM practices and knowing how to mitigate those risks. Practitioners are urged to educate themselves on both the immediate and potential long-term effects of their activities, with the understanding that some forms of BDSM, like breath play or suspension, carry unavoidable dangers.
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Risk-Aware</span>: RACK encourages participants to be fully aware of the risks associated with their chosen activities. This includes understanding the physical, psychological, and emotional impacts of BDSM practices and knowing how to mitigate those risks. Practitioners are urged to educate themselves on both the immediate and potential long-term effects of their activities, with the understanding that some forms of BDSM, like breath play or suspension, carry unavoidable dangers.
                     </li>
                     <li>
-                      <span className="text-primary text-sm min-w-[50px]">Consensual</span>: Consent is central to RACK, with an emphasis on informed and enthusiastic consent. RACK encourages detailed negotiations and discussions so that all participants understand and agree to the potential risks involved. Consent is ongoing, and participants can withdraw it at any time.
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Consensual</span>: Consent is central to RACK, with an emphasis on informed and enthusiastic consent. RACK encourages detailed negotiations and discussions so that all participants understand and agree to the potential risks involved. Consent is ongoing, and participants can withdraw it at any time.
                     </li>
                     <li>
-                      <span className="text-primary text-sm min-w-[50px]">Kink</span>: In RACK, kink refers to any consensual activity that individuals find erotically fulfilling, even if it may not be appealing or acceptable to others. RACK supports the idea that consenting adults should have the freedom to engage in whatever kinks they choose, as long as they are fully aware of the risks and willing to accept responsibility for them.
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Kink</span>: In RACK, kink refers to any consensual activity that individuals find erotically fulfilling, even if it may not be appealing or acceptable to others. RACK supports the idea that consenting adults should have the freedom to engage in whatever kinks they choose, as long as they are fully aware of the risks and willing to accept responsibility for them.
                     </li>
                   </ul>
                 </AccordionContent>
@@ -538,13 +538,13 @@ const Index = () => {
               <AccordionItem value="prick" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
                   <div className="flex items-center gap-3 text-left">
-                    <span className="font-bold text-primary text-sm min-w-[50px]">PRICK</span>
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">PRICK</span>
                     <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Personal Responsibility Informed Kink</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
                   <p>
-                    Personal responsibility, informed, consensual kink (PRICK) is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
+                    <span className="text-rose-400 font-semibold">Personal responsibility, informed, consensual kink (PRICK)</span> is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -552,7 +552,7 @@ const Index = () => {
               <AccordionItem value="fries" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
                 <AccordionTrigger className="hover:no-underline py-3">
                   <div className="flex items-center gap-3 text-left">
-                    <span className="font-bold text-primary text-sm min-w-[50px]">FRIES</span>
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">FRIES</span>
                     <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3 leading-tight">Freely given, Reversible, Informed, Enthusiastic, Specific</span>
                   </div>
                 </AccordionTrigger>
@@ -561,19 +561,19 @@ const Index = () => {
                     <p>The Freely Given, Reversible, Informed, Enthusiastic, Specific (FRIES) model of consent is a consent model used in broader sex education, especially around teaching consent in general. FRIES is an acronym for the following:</p>
                     <ul className="space-y-3">
                       <li>
-                        <span className="text-primary text-sm min-w-[50px]">Freely Given</span>: A "yes" should come without any pressure or the feeling that there will be repercussions to saying "no." Are you feeling pressured into your 'yes'? Are they a host and you feel like you won't be invited again if you say no? Are you feeling like you have to go along with your peer group? Then your consent is not "freely given".
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Freely Given</span>: A "yes" should come without any pressure or the feeling that there will be repercussions to saying "no." Are you feeling pressured into your 'yes'? Are they a host and you feel like you won't be invited again if you say no? Are you feeling like you have to go along with your peer group? Then your consent is not "freely given".
                       </li>
                       <li>
-                        <span className="text-primary text-sm min-w-[50px]">Reversible</span>: Yes can turn to no at any point, for any reason. There isn't a stage where someone cannot say stop.
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Reversible</span>: Yes can turn to no at any point, for any reason. There isn't a stage where someone cannot say stop.
                       </li>
                       <li>
-                        <span className="text-primary text-sm min-w-[50px]">Informed</span>: The person must fully understand what they are agreeing to. That includes any possible risks, or long-term effects such as marks (and how long they'll last).
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Informed</span>: The person must fully understand what they are agreeing to. That includes any possible risks, or long-term effects such as marks (and how long they'll last).
                       </li>
                       <li>
-                        <span className="text-primary text-sm min-w-[50px]">Enthusiastic</span>: True consent is an enthusiastic "yes, please!" not something like "ummm, yeah...I guess?" Anything less than ENTHUSIASTIC consent should be taken as a no!
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Enthusiastic</span>: True consent is an enthusiastic "yes, please!" not something like "ummm, yeah...I guess?" Anything less than ENTHUSIASTIC consent should be taken as a no!
                       </li>
                       <li>
-                        <span className="text-primary text-sm min-w-[50px]">Specific</span>: Make sure what you are saying yes to is all-encompassing of the thing you are about to do. Do not add in other elements that weren't discussed and agreed to.
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Specific</span>: Make sure what you are saying yes to is all-encompassing of the thing you are about to do. Do not add in other elements that weren't discussed and agreed to.
                       </li>
                     </ul>
                   </div>
@@ -581,7 +581,7 @@ const Index = () => {
               </AccordionItem>
             </Accordion>
 
-            <p className="text-xs italic mt-6 pt-4 border-t border-white/5 text-center text-primary/80 font-medium tracking-wide">
+            <p className="text-xs italic mt-6 pt-4 border-t border-white/5 text-center text-rose-400/80 font-medium tracking-wide">
               Be safe, have fun, and respect boundaries.
             </p>
           </div>
@@ -605,10 +605,10 @@ const Index = () => {
                 Created with care and love for consensual and safe play.
               </p>                   
               <p className="text-[12px] uppercase tracking-widest font-semibold">
-                Made in <span className="text-primary">Antarctica</span>
+                Made in <span className="text-rose-400">Antarctica</span>
               </p>               
               <p className="text-[10px] uppercase tracking-widest font-semibold">
-                © 2026 The <span className="text-primary">Kinky</span> Map,v2.1.0
+                © 2026 The <span className="text-rose-400">Kinky</span> Map,v2.1.0
               </p>
             </div>
           </div>
