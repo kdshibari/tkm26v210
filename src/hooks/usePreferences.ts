@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import LZString from 'lz-string';
 import { supabase } from '@/lib/supabase';
 import { Preferences, PreferenceValue, PREFERENCE_CATEGORIES } from '@/data/preferences';
+import { IdentityState, defaultIdentity } from '../IdentityData';
 
 const STORAGE_KEY = 'kinky_map_preferences';
 
@@ -12,6 +13,8 @@ interface StoredState {
   partnerName: string;
   myRole: string;
   partnerRole: string;
+  meIdentity?: IdentityState;
+  partnerIdentity?: IdentityState;
 }
 
 const getDefaultPreferences = (): Preferences => {
@@ -43,13 +46,11 @@ const decodeState = (encoded: string): StoredState | null => {
 const getInitialState = (): Partial<StoredState> => {
   const hash = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
   
-  // If we have an old LZString hash, use it immediately
   if (hash && !hash.startsWith('map=')) {
     const decoded = decodeState(hash);
     if (decoded) return decoded;
   }
 
-  // Otherwise, load straight from localStorage
   if (typeof window !== 'undefined') {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -71,6 +72,10 @@ export const usePreferences = () => {
   const [partnerName, setPartnerName] = useState(initialState.partnerName || '');
   const [myRole, setMyRole] = useState(initialState.myRole || '');
   const [partnerRole, setPartnerRole] = useState(initialState.partnerRole || '');
+  
+  // Connect identity states to initial stored data
+  const [meIdentity, setMeIdentity] = useState<IdentityState>(initialState.meIdentity || defaultIdentity);
+  const [partnerIdentity, setPartnerIdentity] = useState<IdentityState>(initialState.partnerIdentity || defaultIdentity);
   
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -96,6 +101,8 @@ export const usePreferences = () => {
           setPartnerName(decoded.partnerName || '');
           setMyRole(decoded.myRole || '');
           setPartnerRole(decoded.partnerRole || '');
+          setMeIdentity(decoded.meIdentity || defaultIdentity);
+          setPartnerIdentity(decoded.partnerIdentity || defaultIdentity);
         }
         setIsLoading(false);
       }
@@ -107,7 +114,6 @@ export const usePreferences = () => {
 
   // Auto-save to localStorage whenever ANY state changes
   useEffect(() => {
-    // Prevent saving if we are in the middle of loading a shared map or just starting up
     if (!isInitialized || isLoading) return;
 
     const state: StoredState = {
@@ -117,9 +123,11 @@ export const usePreferences = () => {
       partnerName,
       myRole,
       partnerRole,
+      meIdentity,
+      partnerIdentity,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }, [myPreferences, partnerPreferences, myName, partnerName, myRole, partnerRole, isInitialized, isLoading]);
+  }, [myPreferences, partnerPreferences, myName, partnerName, myRole, partnerRole, meIdentity, partnerIdentity, isInitialized, isLoading]);
 
   const updateMyPreference = useCallback((key: string, value: PreferenceValue) => {
     setMyPreferences(prev => ({ ...prev, [key]: value }));
@@ -136,6 +144,8 @@ export const usePreferences = () => {
     setPartnerName('');
     setMyRole('');
     setPartnerRole('');
+    setMeIdentity(defaultIdentity);
+    setPartnerIdentity(defaultIdentity);
     localStorage.removeItem(STORAGE_KEY);
     window.history.replaceState({}, '', window.location.pathname);
   }, []);
@@ -148,6 +158,8 @@ export const usePreferences = () => {
       partnerName,
       myRole,
       partnerRole,
+      meIdentity,
+      partnerIdentity,
     };
 
     const shortId = Math.random().toString(36).substring(2, 10);
@@ -180,5 +192,9 @@ export const usePreferences = () => {
     resetAll,
     getShareableUrl,
     isLoading,
+    meIdentity,
+    setMeIdentity,
+    partnerIdentity,
+    setPartnerIdentity,
   };
 };

@@ -14,6 +14,14 @@ import { useToast } from '@/hooks/use-toast';
 import { PREFERENCE_CATEGORIES } from '@/data/preferences';
 import { calculateMatchScore, hasAnyPreferencesSet } from '@/utils/matchScore';
 import { DisclaimerSection } from '@/components/DisclaimerSection';
+import { IdentityState } from '../IdentityData';
+import { IdentityModal } from '../IdentityModal';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Index = () => {
   const {
@@ -31,10 +39,15 @@ const Index = () => {
     updatePartnerPreference,
     resetAll,
     getShareableUrl,
-    isLoading 
+    isLoading,
+    meIdentity,
+    setMeIdentity,
+    partnerIdentity,
+    setPartnerIdentity
   } = usePreferences();
 
   const [activeTab, setActiveTab] = useState('me');
+  const [isIdentityModalOpen, setIsIdentityModalOpen] = useState(false);
   const { toast } = useToast();
 
   const matchResult = useMemo(() => {
@@ -45,38 +58,98 @@ const Index = () => {
   const visibleCategories = PREFERENCE_CATEGORIES;
 
   const handleCopyProfile = async () => {
-    let text = `😈 ${myName ? `${myName}'s` : 'My'} Kinky Map\n\n`;
+    let titleText = 'My Kinky Map';
+    if (myName && partnerName) {
+      titleText = `${myName} & ${partnerName}'s Kinky Map`;
+    } else if (myName) {
+      titleText = `${myName}'s Kinky Map`;
+    }
+    
+    let text = `😈 ${titleText} 😈\n\n`;
 
-    PREFERENCE_CATEGORIES.forEach(category => {
-      const allHard = category.items.every(item => myPreferences[item.key] === -2);
-      if (allHard) return; 
+    const formatIdentity = (name: string, id: IdentityState, defaultTitle: string) => {
+      if (!id.gender && !id.pronouns && !id.orientation && !id.relationship) return "";
+      
+      const title = name ? `${name.toUpperCase()}'S IDENTITY` : defaultTitle;
+      let section = `❖ ── ${title} ── ❖\n`;
+      if (id.pronouns) section += `Pronouns: ${id.pronouns}\n`;
+      if (id.gender) section += `Gender: ${id.gender}\n`;
+      if (id.orientation) section += `Orientation: ${id.orientation}\n`;
+      if (id.relationship) section += `Dating: ${id.relationship}\n`;
+      return section + `\n`;
+    };
 
-      let catText = `❖ ── ${category.name.toUpperCase()} ── ❖\n`;
-      let hasItems = false;
+    text += formatIdentity(myName, meIdentity, 'MY IDENTITY');
+    text += formatIdentity(partnerName, partnerIdentity, 'PARTNER IDENTITY');
 
-      category.items.forEach(item => {
-        const val = myPreferences[item.key];
-        if (val !== undefined && val !== 0) { 
-          let label = "";
-          if (val === -2) label = "🔴";
-          if (val === -1) label = "🟠";
-          if (val === 1) label = "🟡";
-          if (val === 2) label = "🟢";
+    text += "❖ ── KINK PREFERENCES ── ❖\n";
 
-          catText += `${label} ${item.label}\n`;
-          hasItems = true;
+    const getScoreEmoji = (val: number | undefined) => {
+      if (val === -2) return "🔴";
+      if (val === -1) return "🟠";
+      if (val === 1) return "🟡";
+      if (val === 2) return "🟢";
+      return "⚪"; 
+    };
+
+    if (bothHavePreferences) {
+      const n1 = myName ? myName.toUpperCase() : "ME";
+      const n2 = partnerName ? partnerName.toUpperCase() : "PARTNER";
+      const namesLine = `( ${n1} | ${n2} )`;
+      
+      const padding = Math.max(0, 21 - Math.floor(namesLine.length / 2));
+      text += " ".repeat(padding) + namesLine + "\n\n";
+
+      PREFERENCE_CATEGORIES.forEach(category => {
+        let hasItems = false;
+        let catText = `✦ ${category.name.toUpperCase()} ✦\n`;
+
+        category.items.forEach(item => {
+          const val1 = myPreferences[item.key];
+          const val2 = partnerPreferences[item.key];
+          
+          if ((val1 !== undefined && val1 !== 0) || (val2 !== undefined && val2 !== 0)) {
+            const e1 = getScoreEmoji(val1);
+            const e2 = getScoreEmoji(val2);
+            catText += `  ↳ ${e1} | ${e2}  ${item.label}\n`;
+            hasItems = true;
+          }
+        });
+
+        if (hasItems) {
+          text += catText + '\n';
         }
       });
+    } else {
+      text += `\n`;
+      PREFERENCE_CATEGORIES.forEach(category => {
+        const allHard = category.items.every(item => myPreferences[item.key] === -2);
+        if (allHard) return; 
 
-      if (hasItems) {
-        text += catText + '\n';
-      }
-    });
+        let catText = `✦ ${category.name.toUpperCase()} ✦\n`;
+        let hasItems = false;
+
+        category.items.forEach(item => {
+          const val = myPreferences[item.key];
+          if (val !== undefined && val !== 0) { 
+            const e1 = getScoreEmoji(val);
+            catText += `  ↳ ${e1}  ${item.label}\n`;
+            hasItems = true;
+          }
+        });
+
+        if (hasItems) {
+          text += catText + '\n';
+        }
+      });
+    }
 
     try {
+      const getFooter = (url: string) => text + `──────────────────────\nCompare maps with me here:\n${url}`;
+
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
-          new Blob([text + `Compare maps with me here: ${url}`], { type: 'text/plain' })
+          new Blob([getFooter(url)], { type: 'text/plain' })
         );
         
         await navigator.clipboard.write([
@@ -93,7 +166,7 @@ const Index = () => {
       }
 
       const url = await getShareableUrl();
-      const finalText = text + `Compare maps with me here: ${url}`;
+      const finalText = getFooter(url);
 
       const copyToClipboardFallback = (copyText: string) => {
         const textArea = document.createElement("textarea");
@@ -208,6 +281,13 @@ const Index = () => {
                 />
               </div>
             </div>
+            
+            <button
+              onClick={() => setIsIdentityModalOpen(true)}
+              className="w-full mt-5 p-3.5 bg-gradient-to-r from-primary/10 via-background/40 to-blue-500/10 hover:from-primary/20 hover:to-blue-500/20 border border-white/10 hover:border-white/20 text-foreground/80 hover:text-foreground rounded-xl font-display font-semibold tracking-wide transition-all duration-300 shadow-sm"
+            >
+              How Do We Identify?
+            </button>
           </motion.div>
 
           <div className="hidden lg:grid grid-cols-2 gap-8 mt-10">
@@ -356,6 +436,7 @@ const Index = () => {
         </main>
 
         <footer className="mt-16 space-y-12 max-w-2xl mx-auto">
+          {/* Consent and Safety Section */}
           <div className="bg-card/80 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-xl">
             <h5 className="text-[14px] font-bold text-center uppercase tracking-[0.2em] text-muted-foreground mb-2">
               Consent and Safety Principles
@@ -364,31 +445,145 @@ const Index = () => {
               When diving into BDSM, always keep these in mind:
             </p>
             
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">SSC</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Safe, Sane, and Consensual</span>
-              </div>
+            <Accordion type="single" collapsible className="space-y-3 w-full">
+              <AccordionItem value="ssc" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">SSC</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Safe, Sane, and Consensual</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  <ul className="space-y-3">
+                    <li>
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Safe</span>: Ensuring safety involves taking all necessary precautions to minimize physical and emotional harm during BDSM activities. Practitioners are encouraged to research techniques, use appropriate equipment, and be aware of potential risks, including physical injury or psychological distress. Safety measures may also include having a basic understanding of first aid, especially if engaging in more intense forms of play.
+                    </li>
+                    <li>
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Sane</span>: Sane refers to the mental state and rationality of participants. It emphasizes the importance of engaging in BDSM activities while being of sound mind and aware of risks and consequences. “Sane” implies that participants should avoid actions that could be excessively dangerous, impulsive, or beyond their ability to manage. This principle also considers mental health, as certain intense activities might not be advisable for individuals with specific psychological conditions.
+                    </li>
+                    <li>
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Consensual</span>: Consent is the cornerstone of SSC. All participants must fully agree to engage in BDSM activities, and this agreement must be informed, mutual, and voluntary. Consent in SSC involves clear communication, negotiation of boundaries, and often the use of safe words, which allow participants to pause or stop activities at any time. Consent can be revoked at any point, and respecting this right is essential for ethical BDSM practice.
+                    </li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">RACK</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Risk Aware Consensual Kink</span>
-              </div>
+              <AccordionItem value="rack" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">RACK</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Risk Aware Consensual Kink</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  <ul className="space-y-3">
+                    <li>
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Risk-Aware</span>: RACK encourages participants to be fully aware of the risks associated with their chosen activities. This includes understanding the physical, psychological, and emotional impacts of BDSM practices and knowing how to mitigate those risks. Practitioners are urged to educate themselves on both the immediate and potential long-term effects of their activities, with the understanding that some forms of BDSM, like breath play or suspension, carry unavoidable dangers.
+                    </li>
+                    <li>
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Consensual</span>: Consent is central to RACK, with an emphasis on informed and enthusiastic consent. RACK encourages detailed negotiations and discussions so that all participants understand and agree to the potential risks involved. Consent is ongoing, and participants can withdraw it at any time.
+                    </li>
+                    <li>
+                      <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Kink</span>: In RACK, kink refers to any consensual activity that individuals find erotically fulfilling, even if it may not be appealing or acceptable to others. RACK supports the idea that consenting adults should have the freedom to engage in whatever kinks they choose, as long as they are fully aware of the risks and willing to accept responsibility for them.
+                    </li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">PRICK</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Personal Responsibility Informed Kink</span>
-              </div>
+              <AccordionItem value="prick" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">PRICK</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3">Personal Responsibility Informed Kink</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  <p>
+                    <span className="text-rose-400 font-semibold">Personal responsibility, informed, consensual kink (PRICK)</span> is a BDSM consent model that emphasizes each participant’s responsibility to understand the risks, communicate openly, and make informed choices about the activities they engage in. Unlike models that focus mainly on "safety" or "sanity," PRICK acknowledges that BDSM inherently involves risk, and prioritizes self-awareness, negotiation, and active, informed consent over the illusion of complete safety. It encourages players to educate themselves, take ownership of their limits, and be accountable for their participation.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
 
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-white/5">
-                <span className="font-bold text-primary text-sm min-w-[50px]">FRIES</span>
-                <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3 leading-tight">Freely given, Reversible, Informed, Enthusiastic, Specific</span>
-              </div>
-            </div>
+              <AccordionItem value="fries" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <div className="flex items-center gap-3 text-left">
+                    <span className="font-bold text-rose-400 text-sm min-w-[50px]">FRIES</span>
+                    <span className="text-xs text-muted-foreground italic border-l border-white/10 pl-3 leading-tight">Freely given, Reversible, Informed, Enthusiastic, Specific</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  <div className="space-y-3">
+                    <p>The Freely Given, Reversible, Informed, Enthusiastic, Specific (FRIES) model of consent is a consent model used in broader sex education, especially around teaching consent in general. FRIES is an acronym for the following:</p>
+                    <ul className="space-y-3">
+                      <li>
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Freely Given</span>: A "yes" should come without any pressure or the feeling that there will be repercussions to saying "no." Are you feeling pressured into your 'yes'? Are they a host and you feel like you won't be invited again if you say no? Are you feeling like you have to go along with your peer group? Then your consent is not "freely given".
+                      </li>
+                      <li>
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Reversible</span>: Yes can turn to no at any point, for any reason. There isn't a stage where someone cannot say stop.
+                      </li>
+                      <li>
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Informed</span>: The person must fully understand what they are agreeing to. That includes any possible risks, or long-term effects such as marks (and how long they'll last).
+                      </li>
+                      <li>
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Enthusiastic</span>: True consent is an enthusiastic "yes, please!" not something like "ummm, yeah...I guess?" Anything less than ENTHUSIASTIC consent should be taken as a no!
+                      </li>
+                      <li>
+                        <span className="text-rose-400 font-semibold text-sm min-w-[50px]">Specific</span>: Make sure what you are saying yes to is all-encompassing of the thing you are about to do. Do not add in other elements that weren't discussed and agreed to.
+                      </li>
+                    </ul>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
-            <p className="text-xs italic mt-6 pt-4 border-t border-white/5 text-center text-primary/80 font-medium tracking-wide">
+            <p className="text-xs italic mt-6 pt-4 border-t border-white/5 text-center text-rose-400/80 font-medium tracking-wide">
               Be safe, have fun, and respect boundaries.
             </p>
+          </div>
+
+          {/* SEO FAQ Section */}
+          <div className="bg-card/80 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-xl">
+            <h5 className="text-[14px] font-bold text-center uppercase tracking-[0.2em] text-muted-foreground mb-6">
+              Frequently Asked Questions
+            </h5>
+            
+            <Accordion type="single" collapsible className="space-y-3 w-full">
+              <AccordionItem value="faq-1" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <span className="font-bold text-white/90 text-sm text-left">What are the best online kink and BDSM quizzes for couples?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  The Kinky Map is designed to be the ultimate <strong>kink compatibility quiz for partners</strong>. Unlike a standard <strong>bdsm test</strong> or standard <strong>kink quiz</strong>, it acts as a comprehensive, visually engaging map to explore your shared interests safely and privately.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-2" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <span className="font-bold text-white/90 text-sm text-left">Where can I take a kinky partner test online?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  You can take our interactive <strong>kinky partner test</strong> right here, completely free and securely. Just fill out your preferences, generate a private link, and share it with your partner to compare your <strong>bdsm</strong> and <strong>kink</strong> boundaries side-by-side.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-3" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <span className="font-bold text-white/90 text-sm text-left">Is there a free BDSM quiz to discover my interests?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  Yes! Our <strong>free BDSM quiz</strong> allows you to navigate through dozens of carefully curated categories. Whether you are experienced or just looking for a beginner <strong>kink test</strong> to figure out what you might enjoy, this tool helps you discover your interests securely.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-4" className="border border-white/5 bg-background/50 rounded-xl px-3 border-b-0">
+                <AccordionTrigger className="hover:no-underline py-3">
+                  <span className="font-bold text-white/90 text-sm text-left">How to talk about kinky preferences with a new partner?</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-xs text-muted-foreground/80 pt-1 pb-4 leading-relaxed">
+                  Communication is key in any relationship. Using a <strong>quiz</strong> or negotiation tool like The Kinky Map makes it much easier to break the ice. Instead of guessing, you both fill out the <strong>test</strong> separately, and the system automatically calculates your match score and highlights your overlapping desires.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
 
           <div className="px-2">
@@ -410,14 +605,26 @@ const Index = () => {
                 Created with care and love for consensual and safe play.
               </p>                   
               <p className="text-[12px] uppercase tracking-widest font-semibold">
-                Made in <span className="text-primary">Antarctica</span>
+                Made in <span className="text-rose-400">Antarctica</span>
               </p>               
               <p className="text-[10px] uppercase tracking-widest font-semibold">
-                © 2026 The <span className="text-primary">Kinky</span> Map,v2.0.1
+                © 2026 The <span className="text-rose-400">Kinky</span> Map,v2.1.0
               </p>
             </div>
           </div>
         </footer>
+        
+        <IdentityModal
+          isOpen={isIdentityModalOpen}
+          onClose={() => setIsIdentityModalOpen(false)}
+          meIdentity={meIdentity}
+          setMeIdentity={setMeIdentity}
+          partnerIdentity={partnerIdentity}
+          setPartnerIdentity={setPartnerIdentity}
+          myName={myName}
+          partnerName={partnerName}
+        />
+        
       </div>
     </div>
   );
