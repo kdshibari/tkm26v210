@@ -284,7 +284,7 @@ const Index = () => {
             
             <button
               onClick={() => setIsIdentityModalOpen(true)}
-              className="w-full mt-4 p-3 bg-[#36454F] hover:bg-[#274D60] text-white rounded-lg font-bold transition-colors text-sm"
+              className="w-full mt-5 p-3.5 bg-gradient-to-r from-primary/10 via-background/40 to-blue-500/10 hover:from-primary/20 hover:to-blue-500/20 border border-white/10 hover:border-white/20 text-foreground/80 hover:text-foreground rounded-xl font-display font-semibold tracking-wide transition-all duration-300 shadow-sm"
             >
               How Do We Identify?
             </button>
