@@ -145,7 +145,7 @@ const Index = () => {
     }
 
     try {
-      const getFooter = (url: string) => text + `──────────────────────\n Compare maps with me here:\n${url}`;
+      const getFooter = (url: string) => text + `──────────────────────\nCompare maps with me here:\n${url}`;
 
       if (navigator.clipboard && (window as any).ClipboardItem) {
         const textBlobPromise = getShareableUrl().then(url => 
